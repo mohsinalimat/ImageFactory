@@ -11,7 +11,7 @@ import ImageFactory
 
 class ViewController: UITableViewController {
 
-    var factoryArray: [ImageFactory] = []
+    var images: [UIImage?] = []
     
     let size = CGSize(width: 100, height: 100)
     
@@ -29,29 +29,42 @@ class ViewController: UITableViewController {
     }
     
     func prepareDataSource() {
-        factoryArray.removeAll()
+        images.removeAll()
         
         let sizeType = CGSizeType.fixed(size)
         
-        factoryArray += ImageFactory(fillColor: .brown)
-        factoryArray += ImageFactory(fillGradient: [.red, .green])
+        images += ImageFactory(fillColor: .brown)
+        images += ImageFactory(fillGradient: [.red, .green])
+        images += ImageFactory(borderColor: .red, width: 10, size: sizeType)
+        images += ImageFactory(border: .yellow, width: 10, background: .green, size: sizeType)
+        images += ImageFactory(borderGradient: [.green, .yellow, .red], width: 10, size: sizeType)
+        images += ImageFactory(border: .red, width: 10, alignment: .inside, background: .purple, size: sizeType, cornerRadius: CGCornerRadius(.all, radius: 15))
         
-        factoryArray += ImageFactory(borderColor: .red, width: 10, size: sizeType)
-        factoryArray += ImageFactory(border: .yellow, width: 10, background: .green, size: sizeType)
-        factoryArray += ImageFactory(borderGradient: [.green, .yellow, .red], width: 10, size: sizeType)
-        factoryArray += ImageFactory(border: .red, width: 10, alignment: .inside, background: .purple, size: sizeType, cornerRadius: CGCornerRadius(.all, radius: 15))
+        let finder = #imageLiteral(resourceName: "finder")
+        
+        images += ImageFactory.clipEllipse(image: finder)
+        images += ImageFactory.clipRect(image: finder, rect: CGRect(x: 10, y: 10, width: 30, height: 30))
+        images += ImageFactory.scale(image: finder, to: size / 10)
+        images += ImageFactory.clipRect(image: finder, cornerRadius: CGCornerRadius(.all, radius: 50))
     }
 }
 
-public func += (lhs: inout [ImageFactory], rhs: ImageFactory) {
+public func += (lhs: inout [UIImage?], rhs: ImageFactory) {
+    lhs.append(rhs.image)
+}
+
+public func += (lhs: inout [UIImage?], rhs: UIImage?) {
     lhs.append(rhs)
+}
+
+public func / (lhs: CGSize, rhs: CGFloat) -> CGSize {
+    return CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
 }
 
 extension ViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell") as! ImageTableViewCell
-        let factory = factoryArray[indexPath.row]
-        cell.centerImageView.image = factory.image
+        cell.centerImageView.image = images[indexPath.row]
         return cell
     }
     
@@ -60,7 +73,7 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return factoryArray.count
+        return images.count
     }
 }
 

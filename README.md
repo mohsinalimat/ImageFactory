@@ -2,7 +2,7 @@
 <p align="center">
   <!-- <img src="" alt="EnumCollection"> -->
   <br/><a href="https://cocoapods.org/pods/ImageFactory">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-brightgreen.svg">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-brightgreen.svg">
   <img alt="Author" src="https://img.shields.io/badge/author-Meniny-blue.svg">
   <img alt="Build Passing" src="https://img.shields.io/badge/build-passing-brightgreen.svg">
   <img alt="Swift" src="https://img.shields.io/badge/swift-3.0%2B-orange.svg">
@@ -67,6 +67,12 @@ factoryArray += ImageFactory(border: .yellow, width: 10, background: .green, siz
 factoryArray += ImageFactory(borderGradient: [.green, .yellow, .red], width: 10, size: sizeType)
 factoryArray += ImageFactory(border: .red, width: 10, alignment: .inside, background: .purple, size: sizeType, cornerRadius: CGCornerRadius(.all, radius: 15))
 
-let image = factoryArray.first!.image
-// UIImage?
+let image = factoryArray.first!.image // UIImage?
+
+let finder = #imageLiteral(resourceName: "finder")
+
+let _ = ImageFactory.clipEllipse(image: finder) // UIImage?
+let _ = ImageFactory.clipRect(image: finder, rect: CGRect(x: 10, y: 10, width: 30, height: 30)) // UIImage?
+let _ = ImageFactory.scale(image: finder, to: size / 10) // UIImage?
+let _ = ImageFactory.clipRect(image: finder, cornerRadius: CGCornerRadius(.all, radius: 50)) // UIImage?
 ```

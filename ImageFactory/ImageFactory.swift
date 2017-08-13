@@ -163,6 +163,54 @@ open class ImageFactory {
 }
 
 public extension ImageFactory {
+    /// Clip Image to Ellipse
+    ///
+    /// - Parameters:
+    ///   - image: Image
+    ///   - border: Border Width
+    ///   - color: Border Color
+    /// - Returns: New Image
+    public class func clipEllipse(image: UIImage, border: CGFloat = 0, color: UIColor = .clear) -> UIImage? {
+        return image.clipEllipse(border: border, color: color)
+    }
+    
+    /// Clip Image to Round Rectangle
+    ///
+    /// - Parameters:
+    ///   - image: Image
+    ///   - rect: Rectangle
+    ///   - border: Border Width
+    ///   - color: Border Color
+    /// - Returns: New Image
+    public class func clipRect(image: UIImage, rect: CGRect, border: CGFloat = 0, color: UIColor = .clear) -> UIImage? {
+        return image.clipRect(rect, border: border, color: color)
+    }
+    
+    /// Clip Image to Round Rectangle
+    ///
+    /// - Parameters:
+    ///   - image: Image
+    ///   - cornerRadius: Rorner Radius
+    /// - Returns: New Image
+    public class func clipRect(image: UIImage, cornerRadius: CGCornerRadius) -> UIImage? {
+        return image.clipRect(cornerRadius: cornerRadius)
+    }
+    
+    /// Scale Image to New Size
+    ///
+    /// - Parameters:
+    ///   - image: Image
+    ///   - scale: New Size
+    ///   - border: Border Width
+    ///   - color: Border Color
+    /// - Returns: New Image
+    public class func scale(image: UIImage, to scale: CGSize, border: CGFloat = 0, color: UIColor = .clear) -> UIImage? {
+        return image.scale(to: scale, border: border, color: color)
+    }
+    
+}
+
+public extension ImageFactory {
     
     public var isAllCornerRadiusEquals: Bool {
         return configuration.cornerRadius.isAllEquals
