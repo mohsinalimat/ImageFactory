@@ -1,0 +1,6 @@
+framework module ImageFactory {
+  umbrella header "ImageFactory-umbrella.h"
+
+  export *
+  module * { export * }
+}
