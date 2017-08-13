@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ImageFactory"
-  s.version          = "1.0.0"
+  s.version          = "1.1.0"
   s.summary          = "An easy way to make UIImage objects."
   s.description      = <<-DESC
                         EnumCollection is an easy way to make UIImage objects.
